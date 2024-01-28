@@ -5,8 +5,9 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
+//EVERY elemrnt used MUST be imported from somewhere
 import {
   SafeAreaView,
   ScrollView,
@@ -15,6 +16,9 @@ import {
   Text,
   useColorScheme,
   View,
+  Button,
+  Alert,
+  Image,
 } from 'react-native';
 
 import {
@@ -25,43 +29,27 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
 
 function App(): React.JSX.Element {
+  //runtime state variables. used to make this dynamic winthin a page
+  const [isVisible, setIsVisible] = useState(false);
+  const [count, setCount] = useState(0); // start with count 0
+  //the format is this:
+  //const [<var name>, <set function name>] = useState(<default value>);
+  //var name is the name of the varibale used to acces the data
+  //set function name is the name of the function used to change the value of the data
+  //default value is the initial value of the varible
+  
+  
+  
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
+  //comments in normla javascript are like normal
+  //comments in markup language formatted sections are required to be multyline comments inside of {}
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -71,48 +59,72 @@ function App(): React.JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
+        <Header />{/*the react native logo and welcome text*/}
+		{/*this is accualy a function found in react-native/Libraries/NewAppScreen*/}
+		
+		
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+		  {/*View elements re quivlent to div in html*/}
+		  <View>
+			  <Text>
+			  {/*All renderd thext must be inside of a Text elemtnt*/}
+				pee pee poo poo ghr;aksgjr
+				{'\n'}
+				 peppeppeppeldoepld
+				
+				</Text>
+		  </View>
+		  
         </View>
+		
+		<View>
+      <Text style={styles.title}>
+		{/*because styles is set to title this acts like part of the head element*/}
+        The title and onPress handler are required. It is recommended to set
+        accessibilityLabel to help make your app usable by everyone.
+      </Text>
+	  
+	  
+	  <View style = {styles.padder}>
+		  <Button
+			title="Press me"
+			onPress={() => {
+				Alert.alert('This is an allert window');
+				setIsVisible(true);//make the image visable
+				setCount(count + 1); // increment count on button press
+			}}
+			style = {styles.buttonIzer}
+		  />
+	  </View>
+	  {/* the folowing ony appears when isVisible is true*/}
+	  {isVisible && (
+	    <View>
+			<Text style = {styles.highlight} >Button pressed {count} times</Text>
+			<Image source={require('./Untitled.png')} style={{ width: 500, height: 500 }}/>
+			
+		</View>
+      )}
+    </View>
       </ScrollView>
     </SafeAreaView>
+	
   );
 }
 
+//basicaly css but slightly diffrent
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
   highlight: {
     fontWeight: '700',
   },
+  buttonIzer: {
+	padding: '12%',
+  },
+  padder: {
+	padding: "12%",
+  }
 });
 
 export default App;
