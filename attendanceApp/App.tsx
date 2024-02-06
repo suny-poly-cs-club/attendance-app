@@ -103,7 +103,7 @@ function App(): React.JSX.Element {
 	  {isVisible && (
 	    <View>
 			<Text style = {styles.highlight} >Button pressed {count} times</Text>
-			<Image source={require('./Untitled.png')} style={{ width: 500, height: 500 }}/>
+			<Image source={require('./flow_chart.png')} style={{ width: 500, height: 500 }}/>
 			
 		</View>
       )}
