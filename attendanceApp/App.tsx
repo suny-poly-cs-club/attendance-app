@@ -1,12 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
+/**ONLY EDIT ON main BRANCH
+
+install multy sreen for ISO!!
+For iOS with bare React Native project, make sure you have CocoaPods installed. Then install the pods to complete the installation:
+
+cd ios
+pod install
+cd ..
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';//multiple windows
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import {
   SafeAreaView,
   ScrollView,
@@ -17,102 +22,35 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import ScreenList from './ScreenList.js';
+import DomainList from './DomainList.js';
+import EnterDomain from './EnterDomain.js';
+import SignOrLogIn from './SignOrLogIn.js';
+import SignUp from './SignUp.js';
+import LogIn from './LogIn.js';
+import Scan from './Scan.js';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+		<Stack.Navigator>
+			{/*temporary just for development*/}
+			<Stack.Screen name="Screen_list" component={ScreenList} />
+			{/*register each screen here*/}
+			<Stack.Screen name="Domain_list" component={DomainList} />
+			<Stack.Screen name="Enter_domain" component={EnterDomain} />
+			<Stack.Screen name="Sign_or_log_in" component={SignOrLogIn} />
+			<Stack.Screen name="Sign_up" component={SignUp} /> 
+			<Stack.Screen name="Log_in" component={LogIn} />
+			<Stack.Screen name="Scan" component={Scan} />
+		</Stack.Navigator>
+	</NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
