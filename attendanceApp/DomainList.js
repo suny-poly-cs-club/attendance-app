@@ -8,8 +8,7 @@ const DomainList = ({navigation}) => {
 	return (
 		<View>
 			<Text>
-				You are on the Domain List{'\n'}
-				Plsease switch to the DomainList branch to view content
+				ENTER PAGE CONTENT HERE
 			</Text>
 		</View>
 	);
