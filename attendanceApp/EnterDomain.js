@@ -8,8 +8,7 @@ const EnterDomain = ({navigation}) => {
 	return (
 		<View>
 			<Text>
-				You are on the Enter Domain{'\n'}
-				Plsease switch to the EnterDomain branch to view content
+				ENTER PAGE CONTENT HERE
 			</Text>
 		</View>
 	);
