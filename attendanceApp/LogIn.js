@@ -8,8 +8,7 @@ const LogIn = ({navigation}) => {
 	return (
 		<View>
 			<Text>
-				You are on the Log In{'\n'}
-				Plsease switch to the Log In branch to view content
+				ENTER PAGE CONTENT HERE
 			</Text>
 		</View>
 	);
