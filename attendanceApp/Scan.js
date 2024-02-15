@@ -8,8 +8,7 @@ const Scan = ({navigation}) => {
 	return (
 		<View>
 			<Text>
-				You are on the Scan{'\n'}
-				Plsease switch to the Scan branch to view content
+				ENTER PAGE CONTENT HERE
 			</Text>
 		</View>
 	);
