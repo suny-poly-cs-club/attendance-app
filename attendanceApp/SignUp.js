@@ -3,7 +3,7 @@ import {
   View,
 } from 'react-native';
 
-const ScreenList = ({navigation}) => {
+const SignUp = ({navigation}) => {
 	
 	return (
 		<View>
@@ -15,4 +15,4 @@ const ScreenList = ({navigation}) => {
 	);
 };
 
-export default ScreenList;
+export default SignUp;
