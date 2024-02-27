@@ -5,6 +5,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  Alert,
+  Button,
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
@@ -16,20 +18,29 @@ const viewBorderAmmount =1.5;
 const Scan = ({navigation}) => {
 	
 	return (
-		<View>
+		<View style={styles.centerText}>
 			<Text>
 				Scan QR Code{'\n'}
 			</Text>
-			<View>
+			<View style={styles.cameraView}>
 				<QRCodeScanner
 					onRead={scanResult}
 					flashMode={RNCamera.Constants.FlashMode.off}
-					
+					reactivate={true}
 					reactivateTimeout = {2000}
 					showMarker = {true}
 					style={styles.cameraView}
 					cameraStyle={styles.cameraView}
 				/>
+			</View>
+			<View>
+				<Text>{"\n"}</Text>
+				
+				<Button title="Log Out" onPress={() => { console.log("pressed");}} />
+				
+				<Text>{"\n"}</Text>
+				
+				<Button title="Change Domain" onPress={() => { console.log("pressed"); }} />
 			</View>
 		</View>
 	);
@@ -37,15 +48,16 @@ const Scan = ({navigation}) => {
 
 function scanResult(input){
 	console.log(input);
+	Alert.alert("SCANNED!\n"+input.data);
 }
 
 
 const styles = StyleSheet.create({
   centerText: {
-    flex: 1,
     fontSize: 18,
     padding: 32,
-    color: '#777'
+    color: '#777',
+	textAlign: 'center'
   },
   textBold: {
     fontWeight: '500',
