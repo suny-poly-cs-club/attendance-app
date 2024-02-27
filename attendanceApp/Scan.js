@@ -4,33 +4,40 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+const viewBorderAmmount =1.5;
 
 const Scan = ({navigation}) => {
 	
 	return (
 		<View>
-			<QRCodeScanner
-				onRead={this.onSuccess}
-				flashMode={RNCamera.Constants.FlashMode.off}
-				topContent={
-					<Text style={styles.centerText}>
-						Go to{' '}
-						<Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-						your computer and scan the QR code.
-					</Text>
-				}
-				bottomContent={
-					<TouchableOpacity style={styles.buttonTouchable}>
-						<Text style={styles.buttonText}>OK. Got it!</Text>
-					</TouchableOpacity>
-				}
-			/>
+			<Text>
+				Scan QR Code{'\n'}
+			</Text>
+			<View>
+				<QRCodeScanner
+					onRead={scanResult}
+					flashMode={RNCamera.Constants.FlashMode.off}
+					
+					reactivateTimeout = {2000}
+					showMarker = {true}
+					style={styles.cameraView}
+					cameraStyle={styles.cameraView}
+				/>
+			</View>
 		</View>
 	);
 };
+
+function scanResult(input){
+	console.log(input);
+}
 
 
 const styles = StyleSheet.create({
@@ -50,7 +57,17 @@ const styles = StyleSheet.create({
   },
   buttonTouchable: {
     padding: 16
+  },
+  cameraView:{
+	flex :0,
+	width: Math.floor(windowWidth/viewBorderAmmount),
+	height: Math.floor(windowHeight/viewBorderAmmount),
+	alignSelf: 'center', 
+	justifyContent: 'center'
+	/*top: Math.floor(windowHeight/(viewBorderAmmount*8	)),
+	left: Math.floor(windowWidth/(viewBorderAmmount*4.5))*/
   }
-});
+});//{ height: 200, marginTop: 20, width: 200, alignSelf: 'center', justifyContent: 'center' }
+
 
 export default Scan;
