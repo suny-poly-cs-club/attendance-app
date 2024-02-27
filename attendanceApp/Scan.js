@@ -1,3 +1,4 @@
+//IMPORTANT IOS NEEDS ADDITINAL SETUP: https://react-native-camera.github.io/react-native-camera/docs/installation IOS manual installion section
 import {
   Text,
   View,
@@ -13,7 +14,7 @@ const Scan = ({navigation}) => {
 		<View>
 			<QRCodeScanner
 				onRead={this.onSuccess}
-				flashMode={RNCamera.Constants.FlashMode.flash}
+				flashMode={RNCamera.Constants.FlashMode.off}
 				topContent={
 					<Text style={styles.centerText}>
 						Go to{' '}
