@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     width: "100%",
-  }
-})
+  },
+});
 export default EnterDomain;
