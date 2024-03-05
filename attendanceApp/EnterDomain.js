@@ -14,13 +14,11 @@ const EnterDomain = ({navigation}) => {
 			<Text>
 			    Enter Your Domain:
 			</Text>
-      <View>
-        <TextInput styles={styles.input} placeholder="Your domain"/>
+      <View style={styles.input}>
+        <TextInput placeholder="Your domain"/>
       </View>
       <View>
-        <Button
-        title="Enter" />
-
+        <Button title="Enter" />
       </View>
 		</View>
 	);
@@ -31,8 +29,9 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     borderRadius: 10,
-    padding: 10,
-    width: "100%",
+    paddingTop: 10,
+    paddingRight: 10,
+    width: "80%",
   },
 });
 export default EnterDomain;
