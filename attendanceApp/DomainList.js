@@ -9,6 +9,14 @@ import {
 
 let v2 = false;
 
+const DomainItem = ({domain}) => {
+	return (
+		<View>
+			<Text> {domain} </Text>
+		</View>
+	);
+}
+
 	
 
 const DomainList = ({navigation}) => {
