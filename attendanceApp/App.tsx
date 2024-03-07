@@ -39,14 +39,14 @@ function App(): React.JSX.Element {
     <NavigationContainer>
 		<Stack.Navigator>
 			{/*temporary just for development*/}
-			<Stack.Screen name="Screen_list" component={ScreenList} />
+			<Stack.Screen name="Screen_list" component={ScreenList} options={{headerShown: false }}/>
 			{/*register each screen here*/}
-			<Stack.Screen name="Domain_list" component={DomainList} />
-			<Stack.Screen name="Enter_domain" component={EnterDomain} />
-			<Stack.Screen name="Sign_or_log_in" component={SignOrLogIn} />
-			<Stack.Screen name="Sign_up" component={SignUp} /> 
-			<Stack.Screen name="Log_in" component={LogIn} />
-			<Stack.Screen name="Scan" component={Scan} />
+			<Stack.Screen name="Domain_list" component={DomainList} options={{headerShown: false }}/>
+			<Stack.Screen name="Enter_domain" component={EnterDomain} options={{headerShown: false }}/>
+			<Stack.Screen name="Sign_or_log_in" component={SignOrLogIn} options={{headerShown: false }}/>
+			<Stack.Screen name="Sign_up" component={SignUp} options={{headerShown: false }}/> 
+			<Stack.Screen name="Log_in" component={LogIn} options={{headerShown: false }}/>
+			<Stack.Screen name="Scan" component={Scan} options={{headerShown: false }}/>
 		</Stack.Navigator>
 	</NavigationContainer>
   );
