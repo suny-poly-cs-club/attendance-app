@@ -5,9 +5,8 @@ const SignUp = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // Function to handle sign up
   const handleSignUp = () => {
-    //This would be how to create an alert to let the user know sign up fails or is successful
+  //This would be how to create an alert to let the user know sign up fails or is successful
 	//or notify of other things depending on your needs
     Alert.alert('Sign Up', `Username: ${username}\nPassword: ${password}`);
   };
@@ -17,6 +16,8 @@ const SignUp = ({ navigation }) => {
       <Text style={{ fontSize: 20, marginBottom: 10 }}>SIGN UP</Text>
       <Text style={{ marginBottom: 0 }}>Please sign up below using</Text>
       <Text style={{ marginBottom: 20 }}>your organization specific email</Text>
+      {/*The line below can be commented back in to connect this message to the backend*/}
+		  {/*<Text style={{ marginBottom: 20 }}>TEXT POPULATED BY BACKEND</Text> */}
       <TextInput
         style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
         placeholder="Username"
