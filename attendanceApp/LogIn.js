@@ -11,8 +11,11 @@ const LogIn = ({navigation}) => {
 	const [password, setPassword] = useState('');
 	return (
 		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-		<Text style={{ fontSize: 20, marginBottom: 20 }}>WELCOME</Text>
-		<Text style={{ marginBottom: 10 }}>Please log in below</Text>
+		<Text style={{ fontSize: 20, marginBottom: 10 }}>WELCOME</Text>
+		<Text style={{ marginBottom: 0 }}>Please log in below using</Text>
+		<Text style={{ marginBottom: 20 }}>your organization specific email</Text>
+		{/*The line below can be commented back in to connect this message to the backend*/}
+		{/*<Text style={{ marginBottom: 20 }}>TEXT POPULATED BY BACKEND</Text> */}
 		  <TextInput
 			style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
 			placeholder="Username"
