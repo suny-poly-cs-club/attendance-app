@@ -4,8 +4,21 @@ import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 const LogIn = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogIn = async () => {
+    // Validate if username or password is blank
+    if (!username || !password) {
+      setErrorMessage('Username and password are required');
+      // Clear error message after 5 seconds
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
+      return;
+    }
+
+//Below is to handle back end 
+/*
     try {
       const response = await fetch('https://example.com/login', {
         method: 'POST',
@@ -27,6 +40,7 @@ const LogIn = ({ navigation }) => {
       console.error('Error:', error);
       Alert.alert('Error', 'An error occurred. Please try again later.');
     }
+    */
   };
 
   return (
@@ -47,6 +61,9 @@ const LogIn = ({ navigation }) => {
         onChangeText={setPassword}
         secureTextEntry={true} 
       />
+      {errorMessage ? (
+        <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
+      ) : null}
       <TouchableOpacity
         style={{ backgroundColor: 'blue', padding: 10 }}
         onPress={handleLogIn}
