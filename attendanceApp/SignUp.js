@@ -2,13 +2,36 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 
 const SignUp = ({ navigation }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const handleSignUp = () => {
-  //This would be how to create an alert to let the user know sign up fails or is successful
-	//or notify of other things depending on your needs
-    Alert.alert('Sign Up', `Username: ${username}\nPassword: ${password}`);
+    // Enforce criteria
+    if (password.length < 5) {
+      Alert.alert('Password Error', 'Password must be at least 5 characters long');
+      return;
+    }
+
+    if (email.length > 255) {
+      Alert.alert('Email Error', 'Email must be at most 255 characters long');
+      return;
+    }
+
+    if (firstName.length > 80) {
+      Alert.alert('First Name Error', 'First Name must be at most 80 characters long');
+      return;
+    }
+
+    if (lastName.length > 80) {
+      Alert.alert('Last Name Error', 'Last Name must be at most 80 characters long');
+      return;
+    }
+
+    // This would be how to create an alert to let the user know sign up fails or is successful
+    // or notify of other things depending on your needs
+    Alert.alert('Sign Up', `Email: ${email}\nPassword: ${password}\nFirst Name: ${firstName}\nLast Name: ${lastName}`);
   };
 
   return (
@@ -17,12 +40,13 @@ const SignUp = ({ navigation }) => {
       <Text style={{ marginBottom: 0 }}>Please sign up below using</Text>
       <Text style={{ marginBottom: 20 }}>your organization specific email</Text>
       {/*The line below can be commented back in to connect this message to the backend*/}
-		  {/*<Text style={{ marginBottom: 20 }}>TEXT POPULATED BY BACKEND</Text> */}
+      {/*<Text style={{ marginBottom: 20 }}>TEXT POPULATED BY BACKEND</Text> */}
       <TextInput
         style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
       />
       <TextInput
         style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
@@ -30,6 +54,18 @@ const SignUp = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
         secureTextEntry={true}
+      />
+      <TextInput
+        style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
+        placeholder="First Name"
+        value={firstName}
+        onChangeText={setFirstName}
+      />
+      <TextInput
+        style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
+        placeholder="Last Name"
+        value={lastName}
+        onChangeText={setLastName}
       />
       <TouchableOpacity
         style={{ backgroundColor: 'blue', padding: 10 }}
