@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
   },
   global: {
     padding: 20,
-    jusify: "center",
   },
   title: {
     paddingBottom: 10,
