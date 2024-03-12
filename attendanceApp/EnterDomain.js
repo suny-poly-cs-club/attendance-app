@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
-    width: "95%",
+    width: "100%",
   },
   global: {
     padding: 20,
