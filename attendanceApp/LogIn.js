@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 
 const LogIn = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [orgMsg, setOrgMsg] = useState('');
 
   const handleLogIn = async () => {
     // Validate if username or password is blank
@@ -42,35 +43,44 @@ const LogIn = ({ navigation }) => {
     }
     */
   };
+  
+  useEffect(() => {
+	//load org msg from the server here
+	let orgMsg = "TMP MSG"
+	setOrgMsg(orgMsg);
+  },[]);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 20, marginBottom: 10 }}>LOG IN</Text>
-      <Text style={{ marginBottom: 0 }}>Please log in below using</Text>
-      <Text style={{ marginBottom: 20 }}>your organization specific email</Text>
-      <TextInput
-        style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={true} 
-      />
-      {errorMessage ? (
-        <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
-      ) : null}
-      <TouchableOpacity
-        style={{ backgroundColor: 'blue', padding: 10 }}
-        onPress={handleLogIn}
-      >
-        <Text style={{ color: 'white' }}>Log In</Text>
-      </TouchableOpacity>
-    </View>
+	<ScrollView
+        contentInsetAdjustmentBehavior="automatic">
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{ fontSize: 20, marginBottom: 10 }}>LOG IN</Text>
+        <Text style={{ marginBottom: 0 }}>Please log in below</Text>
+	    <Text style={{ marginBottom: 20 }}>{orgMsg}</Text>
+        <TextInput
+          style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
+          placeholder="Username"
+          value={username}
+          onChangeText={setUsername}
+        />
+        <TextInput
+          style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={true} 
+        />
+        {errorMessage ? (
+          <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
+        ) : null}
+        <TouchableOpacity
+          style={{ backgroundColor: 'blue', padding: 10 }}
+          onPress={handleLogIn}
+        >
+          <Text style={{ color: 'white' }}>Log In</Text>
+        </TouchableOpacity>
+      </View>
+	</ScrollView>
   );
 };
 
