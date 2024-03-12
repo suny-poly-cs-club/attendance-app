@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [orgMsg, setOrgMsg] = useState('');
 
   const handleSignUp = () => {
     // Enforce criteria
@@ -33,14 +34,23 @@ const SignUp = ({ navigation }) => {
     // or notify of other things depending on your needs
     Alert.alert('Sign Up', `Email: ${email}\nPassword: ${password}\nFirst Name: ${firstName}\nLast Name: ${lastName}`);
   };
+  
+  useEffect(() => {
+		//load org msg from the server here
+		let orgMsg = "TMP MSG"
+		setOrgMsg(orgMsg);
+		
+	},[]);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <ScrollView
+        contentInsetAdjustmentBehavior="automatic">
+	 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 20, marginBottom: 10 }}>SIGN UP</Text>
       <Text style={{ marginBottom: 0 }}>Please sign up below using</Text>
       <Text style={{ marginBottom: 20 }}>your organization specific email</Text>
       {/*The line below can be commented back in to connect this message to the backend*/}
-      {/*<Text style={{ marginBottom: 20 }}>TEXT POPULATED BY BACKEND</Text> */}
+      <Text style={{ marginBottom: 20 }}>{orgMsg}</Text>
       <TextInput
         style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
         placeholder="Email"
@@ -73,7 +83,8 @@ const SignUp = ({ navigation }) => {
       >
         <Text style={{ color: 'white' }}>Sign Up</Text>
       </TouchableOpacity>
-    </View>
+	 </View>
+    </ScrollView>
   );
 };
 
