@@ -4,6 +4,7 @@ import { Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'reac
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [orgMsg, setOrgMsg] = useState('');
@@ -14,6 +15,11 @@ const SignUp = ({ navigation }) => {
       Alert.alert('Password Error', 'Password must be at least 5 characters long');
       return;
     }
+	
+	if(password != confirmPassword){
+		Alert.alert('Password Error', "Passwords do not match!");
+		return;
+	}
 
     if (email.length > 255) {
       Alert.alert('Email Error', 'Email must be at most 255 characters long');
@@ -63,6 +69,13 @@ const SignUp = ({ navigation }) => {
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
+        secureTextEntry={true}
+      />
+	  <TextInput
+        style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
         secureTextEntry={true}
       />
       <TextInput

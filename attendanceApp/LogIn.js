@@ -59,7 +59,7 @@ const LogIn = ({ navigation }) => {
 	    <Text style={{ marginBottom: 20 }}>{orgMsg}</Text>
         <TextInput
           style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
-          placeholder="Username"
+          placeholder="Email"
           value={username}
           onChangeText={setUsername}
         />
