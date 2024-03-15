@@ -1,18 +1,64 @@
 import {
   Text,
   View,
+  StyleSheet,
+  Button,
+  ScrollView,
 } from 'react-native';
 
+import React, { useState, useEffect  } from 'react';
+
+function goToSignUpPage(){
+	console.log("GO TO SIGN UP");
+}
+
+function goToLoginPage(){
+	console.log("GO TO LOG IN");
+}
+
 const SignOrLogIn = ({navigation}) => {
+	const [orgMsg, setOrgMsg] = useState("");
+	
+	useEffect(() => {
+		//load org message from the server here
+		let orgmsg = "TMP MESSAGE";
+		setOrgMsg(orgmsg);
+	},[]);
 	
 	return (
-		<View>
-			<Text>
-				You are on the Sign Or Log In{'\n'}
-				Plsease switch to the signOrLogIn branch to view content
+		<ScrollView
+        contentInsetAdjustmentBehavior="automatic">
+			<Text style={styles.title}>
+				SIGN UP {'\n'} OR {'\n'} LOG IN
 			</Text>
-		</View>
+			<Text> {'\n'} </Text>
+			<Text style={styles.orgMsgStyle}> {orgMsg} </Text>
+			<Text> {'\n'} </Text>
+			<View style = {styles.buttonBox}>
+				<Button title="Log In" onPress = {goToLoginPage} />
+				<Text>{'\n'}</Text>
+				<Button title="Sign Up" onPress = {goToSignUpPage}/>
+			</View>
+		</ScrollView>
 	);
 };
+
+const styles = StyleSheet.create({
+  mainBox: {
+    fontWeight: '700',
+  },
+  title: {
+	fontSize: 30,
+	textAlign: "center"
+  },
+  orgMsgStyle: {
+	textAlign: "center"  
+  },
+  buttonBox: {
+	  padding: "1%"
+
+  }
+});
+
 
 export default SignOrLogIn;
