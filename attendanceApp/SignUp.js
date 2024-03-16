@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 
-const SignUp = ({ navigation }) => {
+const SignUp = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -53,8 +53,7 @@ const SignUp = ({ navigation }) => {
         contentInsetAdjustmentBehavior="automatic">
 	 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 20, marginBottom: 10 }}>SIGN UP</Text>
-      <Text style={{ marginBottom: 0 }}>Please sign up below using</Text>
-      <Text style={{ marginBottom: 20 }}>your organization specific email</Text>
+      <Text style={{ marginBottom: 20 }}>Use a unique password</Text>
       {/*The line below can be commented back in to connect this message to the backend*/}
       <Text style={{ marginBottom: 20 }}>{orgMsg}</Text>
       <TextInput

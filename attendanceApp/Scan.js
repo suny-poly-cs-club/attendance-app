@@ -3,7 +3,7 @@ import {
   View,
 } from 'react-native';
 
-const Scan = ({navigation}) => {
+const Scan = ({navigation, route}) => {
 	
 	return (
 		<View>

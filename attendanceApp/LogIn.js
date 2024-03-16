@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 
-const LogIn = ({ navigation }) => {
+const LogIn = ({ navigation, route }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');

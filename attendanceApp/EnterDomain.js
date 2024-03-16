@@ -7,7 +7,7 @@ import {
   Button
 } from 'react-native';
 
-const EnterDomain = ({navigation}) => {
+const EnterDomain = ({navigation, route}) => {
 
 	return (
 		<View style={styles.global}>

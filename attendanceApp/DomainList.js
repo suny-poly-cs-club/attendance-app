@@ -9,11 +9,13 @@ import {
   StyleSheet
 } from 'react-native';
 
+import Context from './context.js'
+
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-let v2 = false;
+let context = null;
 
 const DomainItem = ({domain}) => {
 	if(domain == ''){
@@ -43,13 +45,14 @@ function selectDomain(domain){
 	console.log("Selected: ",domain);
 }	
 
-function goToAddNewScreen(){
+function goToAddNewScreen(navigation){
 	console.log("going to enter new domain screen");
+	context.goToPage("enterDomain",navigation);
 }
 
 const tmpDomainArray = ["HI","HOW","EEEEEE","1","2","3","4","attendace.reallyLongDomain.co.uk:3000/redirect/api/attandece/abcdefghijklmnopqrstuvwxyz/123456789000","6","7","8","9","10","11","12","13","14","15","16","17","18","19"];
 
-const DomainList = ({navigation}) => {
+const DomainList = ({navigation, route}) => {
 	const isDarkMode = useColorScheme() === 'dark';
 
 	const backgroundStyle = {
@@ -57,10 +60,10 @@ const DomainList = ({navigation}) => {
 	};
 	
 	const [domains, setDomains] = useState([]);
-	if(!v2){
-		
-		v2=true;
-	}
+
+	context = route.params.context
+	//console.log(context);
+
 	useEffect(() => {
 		//load domain list here
 		let listOfDomains = tmpDomainArray;
@@ -79,7 +82,7 @@ const DomainList = ({navigation}) => {
 				<Text style={styles.titletext}>
 					Select Domain:
 				</Text>
-				<Button title = "Add New Domain" onPress={goToAddNewScreen}/>
+				<Button title = "Add New Domain" onPress={() => {goToAddNewScreen(navigation)}}/>
 				<FlatList
 				data = {domains}
 				renderItem={({item}) => <DomainItem domain={item} />}

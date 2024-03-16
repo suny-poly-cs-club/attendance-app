@@ -16,7 +16,7 @@ function goToLoginPage(){
 	console.log("GO TO LOG IN");
 }
 
-const SignOrLogIn = ({navigation}) => {
+const SignOrLogIn = ({navigation, route}) => {
 	const [orgMsg, setOrgMsg] = useState("");
 	
 	useEffect(() => {
