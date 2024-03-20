@@ -16,8 +16,12 @@ function goToLoginPage(){
 	console.log("GO TO LOG IN");
 }
 
+let context = null;
+
 const SignOrLogIn = ({navigation, route}) => {
 	const [orgMsg, setOrgMsg] = useState("");
+	
+	context = route.params.context
 	
 	useEffect(() => {
 		//load org message from the server here

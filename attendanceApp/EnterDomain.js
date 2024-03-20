@@ -7,7 +7,11 @@ import {
   Button
 } from 'react-native';
 
+let context = null;
+
 const EnterDomain = ({navigation, route}) => {
+	
+	context = route.params.context
 
 	return (
 		<View style={styles.global}>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 
+let context = null;
+
 const SignUp = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -8,6 +10,8 @@ const SignUp = ({ navigation, route }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [orgMsg, setOrgMsg] = useState('');
+  
+  context = route.params.context
 
   const handleSignUp = () => {
     // Enforce criteria

@@ -3,7 +3,10 @@ import {
   View,
 } from 'react-native';
 
+let context = null;
+
 const Scan = ({navigation, route}) => {
+	context = route.params.context
 	
 	return (
 		<View>

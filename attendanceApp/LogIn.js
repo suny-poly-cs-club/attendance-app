@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 
+let context = null;
+
 const LogIn = ({ navigation, route }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [orgMsg, setOrgMsg] = useState('');
+  
+  context = route.params.context
 
   const handleLogIn = async () => {
     // Validate if username or password is blank
