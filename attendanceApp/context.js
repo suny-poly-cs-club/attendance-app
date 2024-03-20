@@ -11,7 +11,7 @@ class Context{
 		@param navigation the navigation object provied to the page
 	*/
 	goToPage(page, navigation){
-		currentPage = page;//set the desired page
+		this.currentPage = page;//set the desired page
 		navigation.goBack();//force the screen back to the primary screen to do re navigation
 	}
 	

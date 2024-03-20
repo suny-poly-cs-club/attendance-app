@@ -17,10 +17,33 @@ const ScreenList = ({navigation}) => {
 			//check context Domain
 			//navigte to the requested page
 			//if unknown go to domain list
+			/*
+			let page = context.getCurrentPage();
+			switch(page){
+				
+				case "enterDomain":
+					navigation.navigate('Enter_domain',{"context": context})
+					break;
+				case "signOrLogin":
+					navigation.navigate('Sign_or_log_in',{"context": context})
+					break;
+				case "signUp":
+					navigation.navigate('Sign_up',{"context": context})
+					break;
+				case "login":
+					navigation.navigate('Log_in',{"context": context})
+					break;
+				case "scan":
+					navigation.navigate('Scan',{"context": context})
+					break;
+				default:
+					navigation.navigate('Domain_list',{"context": context})
+					break;
+			}*/
 
 		});
 		
-	},[navigation]);
+	},[navigation,context]);
 	return (
 		<View>
 			<Text>
