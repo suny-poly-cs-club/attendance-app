@@ -8,11 +8,11 @@ import {
 
 import React, { useState, useEffect  } from 'react';
 
-function goToSignUpPage(){
+function goToSignUpPage(navigation){
 	console.log("GO TO SIGN UP");
 }
 
-function goToLoginPage(){
+function goToLoginPage(navigation){
 	console.log("GO TO LOG IN");
 }
 
@@ -25,9 +25,15 @@ const SignOrLogIn = ({navigation, route}) => {
 	
 	useEffect(() => {
 		//load org message from the server here
+		//GET to /message
 		let orgmsg = "TMP MESSAGE";
 		setOrgMsg(orgmsg);
-	},[]);
+		//check if the user has a currently valid token for this domain
+		//GET to /user
+		//if status 401 then continue to this page
+		//if status 200
+		//got to scan
+		},[]);
 	
 	return (
 		<ScrollView
@@ -39,10 +45,11 @@ const SignOrLogIn = ({navigation, route}) => {
 			<Text style={styles.orgMsgStyle}> {orgMsg} </Text>
 			<Text> {'\n'} </Text>
 			<View style = {styles.buttonBox}>
-				<Button title="Log In" onPress = {goToLoginPage} />
+				<Button title="Log In" onPress = {()=>{goToLoginPage(navigation)}} />
 				<Text>{'\n'}</Text>
-				<Button title="Sign Up" onPress = {goToSignUpPage}/>
+				<Button title="Sign Up" onPress = {()=>{goToSignUpPage(navigation)}}/>
 			</View>
+			{/*back button*/}
 		</ScrollView>
 	);
 };

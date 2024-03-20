@@ -39,10 +39,14 @@ const DomainItem = ({domain}) => {
 
 function removeDomain(domain){
 	console.log("removed: ",domain);
+	//remove domain from locoal list
+	//remove domain from stored list
 }
 
 function selectDomain(domain){
 	console.log("Selected: ",domain);
+	//set context Domain
+	//go to sign or login
 }	
 
 function goToAddNewScreen(navigation){
@@ -72,9 +76,10 @@ const DomainList = ({navigation, route}) => {
 			listOfDomains.push("");//add a blank element to the end of the array to make sure scrolling works
 		}
 		setDomains(listOfDomains);
+		//if the list is empty
+		//goto enter domain
 	},[]);
 	
-	//apperently FlatList should have a scroll view inside it but it does not seem to be working for me
 	//apperently you should not put listses inside of scroll views
 	return (
 		<SafeAreaView style={backgroundStyle}>

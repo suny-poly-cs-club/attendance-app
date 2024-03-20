@@ -21,7 +21,12 @@ const LogIn = ({ navigation, route }) => {
       }, 5000);
       return;
     }
-
+	
+	//POST to /login {email,password}
+	//set the context token
+	//goto scan
+	
+	
 //Below is to handle back end 
 /*
     try {
@@ -50,6 +55,7 @@ const LogIn = ({ navigation, route }) => {
   
   useEffect(() => {
 	//load org msg from the server here
+	//GET to /message
 	let orgMsg = "TMP MSG"
 	setOrgMsg(orgMsg);
   },[]);
@@ -83,6 +89,7 @@ const LogIn = ({ navigation, route }) => {
         >
           <Text style={{ color: 'white' }}>Log In</Text>
         </TouchableOpacity>
+		{/*back button*/}
       </View>
 	</ScrollView>
   );

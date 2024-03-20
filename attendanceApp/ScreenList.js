@@ -14,7 +14,9 @@ const ScreenList = ({navigation}) => {
 	useEffect(() => {
 		navigation.addListener('focus', () => {
 			//code here runs every time this screen is made the active screen
-			
+			//check context Domain
+			//navigte to the requested page
+			//if unknown go to domain list
 
 		});
 		

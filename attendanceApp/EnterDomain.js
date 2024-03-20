@@ -24,8 +24,14 @@ const EnterDomain = ({navigation, route}) => {
         <TextInput nativeID="domainField" placeholder="Your domain"/>
       </View>
       <View style = {styles.enterButton}>
-        <Button title="Enter" />
+        <Button title="Enter" onPress={() => {
+			//verify domain (GET to /ver) shoule match "attendance app cs"
+			//save the new domain to the stored list
+			//set the context domain
+			//goto sign or login
+		}}/>
       </View>
+	  {/*back button*/}
 		</View>
 	);
 };

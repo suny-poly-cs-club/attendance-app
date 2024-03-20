@@ -40,6 +40,14 @@ const SignUp = ({ navigation, route }) => {
       return;
     }
 
+	//ask the back end to create the user
+	//POST to /sign-up {firstName, lastName, email, password}
+	//if not success try to read and display the error message
+	//if success
+	//set context token
+	//go to scan
+	
+	
     // This would be how to create an alert to let the user know sign up fails or is successful
     // or notify of other things depending on your needs
     Alert.alert('Sign Up', `Email: ${email}\nPassword: ${password}\nFirst Name: ${firstName}\nLast Name: ${lastName}`);
@@ -48,6 +56,7 @@ const SignUp = ({ navigation, route }) => {
   useEffect(() => {
 		//load org msg from the server here
 		let orgMsg = "TMP MSG"
+		//GET to /message
 		setOrgMsg(orgMsg);
 		
 	},[]);
@@ -100,6 +109,7 @@ const SignUp = ({ navigation, route }) => {
         <Text style={{ color: 'white' }}>Sign Up</Text>
       </TouchableOpacity>
 	 </View>
+	 {/*back button*/}
     </ScrollView>
   );
 };
