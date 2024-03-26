@@ -31,13 +31,13 @@ const DomainItem = ({domain,navigation}) => {
 			<View style = {styles.listButtons}>
 				<Button title = "Select" onPress={() => { selectDomain(domain,navigation)}} />
 				<Text> {'  '} </Text>
-				<Button title = "Remove" onPress={() => { removeDomain(domain)}} color = "red"/>
+				<Button title = "Remove" onPress={() => { removeDomain(domain,navigation)}} color = "red"/>
 			</View>
 		</View>
 	);
 }
 
-function removeDomain(domain){
+function removeDomain(domain,navigation){
 	console.log("removed: ",domain);
 	//remove domain from locoal list
 	for(let i=0;i<gdomains.length;i++){
@@ -49,6 +49,7 @@ function removeDomain(domain){
 	gsetDomains(gdomains);
 	//remove domain from stored list
 	context.removeDomain(domain);
+	navigation.goBack();//I can not be botherd to figure out how to make the list auto update so I will just force the screen to be reloaded
 }
 
 function selectDomain(domain,navigation){
@@ -56,7 +57,7 @@ function selectDomain(domain,navigation){
 	//set context Domain
 	context.setDomain(domain);
 	//go to sign or login
-	context.goToPage("signUp",navigation);
+	context.goToPage("signOrLogin",navigation);
 }	
 
 function goToAddNewScreen(navigation){

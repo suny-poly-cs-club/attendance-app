@@ -52,17 +52,17 @@ class Context{
 				break;
 			}
 		}
-		saveDomainData();
+		this.saveDomainData();
 	}
 	
 	addNewDomain(newDomain){
 		this.domain = newDomain;
 		this.token = "";
-		let newDomainData;
+		let newDomainData = JSON.parse('{"domain": "", "token": ""}');
 		newDomainData.domain = this.domain;
 		newDomainData.token = this.token;
 		this.domainData.push(newDomainData);
-		saveDomainData();
+		this.saveDomainData();
 	}
 	
 	removeDomain(domainName){
@@ -72,7 +72,9 @@ class Context{
 				break;
 			}
 		}
+		this.saveDomainData();
 	}
+	
 	
 	saveDomainData(){
 		if(this.domainData == undefined){

@@ -6,11 +6,12 @@ import {
   StyleSheet,
   Button
 } from 'react-native';
+import {useState} from 'react';
 
 let context = null;
 
 const EnterDomain = ({navigation, route}) => {
-	
+	const [inputText, setInputText] = useState('');
 	context = route.params.context
 
 	return (
@@ -21,14 +22,18 @@ const EnterDomain = ({navigation, route}) => {
   			</Text>
       </View>
       <View style={styles.input}>
-        <TextInput nativeID="domainField" placeholder="Your domain"/>
+        <TextInput nativeID="domainField" placeholder="Your domain" onChangeText={newText => setInputText(newText)}/>
       </View>
       <View style = {styles.enterButton}>
         <Button title="Enter" onPress={() => {
 			//verify domain (GET to /ver) shoule match "attendance app cs"
+			
+			
 			//save the new domain to the stored list
-			//set the context domain
+			//set the context domain(same as prevous step)
+			context.addNewDomain(inputText);
 			//goto sign or login
+			context.goToPage("signOrLogin",navigation);
 		}}/>
       </View>
 	  {/*back button*/}
