@@ -7,6 +7,7 @@ class Context{
 		this.domain = "";
 		this.token = "";
 		this.loadDomainData();
+		this.protocal = "";
 	}
 	
 	/**preferd method for switching between pages
@@ -30,6 +31,10 @@ class Context{
 		return this.token;
 	}
 	
+	getProtocall(){
+		return this.protocal;
+	}
+	
 	setDomain(newDomain){
 		this.domain=newDomain;
 		this.token = "";
@@ -37,6 +42,7 @@ class Context{
 		for(let i=0;i<this.domainData.length;i++){
 			if(this.domainData[i].domain == newDomain){
 				this.token = this.domainData[i].token;
+				this.protocal = this.domainData[i].protocal;
 				break;
 			}
 		}
@@ -55,14 +61,17 @@ class Context{
 		this.saveDomainData();
 	}
 	
-	addNewDomain(newDomain){
+	addNewDomain(newDomain,protocal){
 		this.domain = newDomain;
 		this.token = "";
-		let newDomainData = JSON.parse('{"domain": "", "token": ""}');
+		this.protocal = protocal;
+		let newDomainData = JSON.parse('{"domain": "", "token": "" , "protocal": ""}');
 		newDomainData.domain = this.domain;
 		newDomainData.token = this.token;
+		newDomainData.protocal = this.protocal;
 		this.domainData.push(newDomainData);
 		this.saveDomainData();
+		
 	}
 	
 	removeDomain(domainName){
