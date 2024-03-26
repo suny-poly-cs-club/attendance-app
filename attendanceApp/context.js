@@ -6,6 +6,7 @@ class Context{
 		this.currentPage = "";
 		this.domain = "";
 		this.token = "";
+		this.loadDomainData();
 	}
 	
 	/**preferd method for switching between pages
@@ -31,12 +32,46 @@ class Context{
 	
 	setDomain(newDomain){
 		this.domain=newDomain;
+		this.token = "";
 		//load the correspoing token for this domain
+		for(let i=0;i<this.domainData.length;i++){
+			if(this.domainData[i].domain == newDomain){
+				this.token = this.domainData[i].token;
+				break;
+			}
+		}
+		
 	}
 	
 	setToken(newToken){
-		thie.token=newToken;
+		this.token=newToken;
 		//save new token to this domain
+		for(let i=0;i<this.domainData.length;i++){
+			if(this.domainData[i].domain == this.domain){
+				this.domainData[i].token = this.token;
+				break;
+			}
+		}
+		saveDomainData();
+	}
+	
+	addNewDomain(newDomain){
+		this.domain = newDomain;
+		this.token = "";
+		let newDomainData;
+		newDomainData.domain = this.domain;
+		newDomainData.token = this.token;
+		this.domainData.push(newDomainData);
+		saveDomainData();
+	}
+	
+	removeDomain(domainName){
+		for(let i=0;i<this.domainData.length;i++){
+			if(this.domainData[i].domain == domainName){
+				this.domainData.splice(i, 1); // 2nd parameter means remove one item only
+				break;
+			}
+		}
 	}
 	
 	saveDomainData(){
@@ -57,11 +92,11 @@ class Context{
 			// found data go to then()
 			
 			this.domainData= JSON.parse(ret);
-			console.log(this.domainData);
+			//console.log(this.domainData);
 		}).catch(err => {
 			// any exception including data not found
 			// goes to catch()
-			console.warn(err.message);
+			//console.warn(err.message);
 			this.saveDomainData();
 		})
 	}		
