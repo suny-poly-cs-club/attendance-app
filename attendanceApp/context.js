@@ -27,6 +27,10 @@ class Context{
 		return this.domain;
 	}
 	
+	getURL(){
+		return this.getProtocall()+this.getDomain();
+	}
+	
 	getToken(){
 		return this.token;
 	}
