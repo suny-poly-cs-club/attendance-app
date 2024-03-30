@@ -11,6 +11,10 @@ const LogIn = ({ navigation, route }) => {
   
   context = route.params.context
 
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
   const handleLogIn = async () => {
     // Validate if username or password is blank
     if (!username || !password) {
@@ -22,36 +26,40 @@ const LogIn = ({ navigation, route }) => {
       return;
     }
 	
-	//POST to /login {email,password}
-	//set the context token
-	//goto scan
-	
+//POST to /login {email,password}
+//set the context token
+//goto scan
 	
 //Below is to handle back end 
-/*
-    try {
-      const response = await fetch('https://example.com/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username,
-          password
-        })
-      });
+  try {
+    const response = await fetch('https://example.com/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username, // Assuming email is the user's email address
+        password
+      })
+    });
 
-      if (response.ok) {
-        navigation.navigate('Home');
-      } else {
-        Alert.alert('Error', 'Incorrect username or password. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      Alert.alert('Error', 'An error occurred. Please try again later.');
+    if (response.ok) {
+      const data = await response.json(); // Parse response body as JSON
+      const authToken = data.token; // Assuming the server returns the authentication token as 'token'
+      
+      // Set the context token
+      context.setToken(authToken);
+
+      // Navigate to the 'scan' screen
+      navigation.navigate('Scan');
+    } else {
+      Alert.alert('Error', 'Incorrect username or password. Please try again.');
     }
-    */
-  };
+  } catch (error) {
+    console.error('Error:', error);
+    Alert.alert('Error', 'An error occurred. Please try again later.');
+  }
+};
   
   useEffect(() => {
 	//load org msg from the server here
@@ -89,9 +97,14 @@ const LogIn = ({ navigation, route }) => {
         >
           <Text style={{ color: 'white' }}>Log In</Text>
         </TouchableOpacity>
-		{/*back button*/}
+        <TouchableOpacity
+          style={{ backgroundColor: 'gray', padding: 10, marginTop: 15}}
+          onPress={handleGoBack}
+        >
+          <Text style={{ color: 'white' }}>Back</Text>
+        </TouchableOpacity>
       </View>
-	</ScrollView>
+	  </ScrollView>
   );
 };
 
