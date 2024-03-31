@@ -89,8 +89,7 @@ const SignUp = ({ navigation, route }) => {
     Alert.alert('Sign Up', `Email: ${email}\nPassword: ${password}\nFirst Name: ${firstName}\nLast Name: ${lastName}`);
 };
   
-  //Below is the logic to load an organizational message from the server
-
+//Below is the logic to load an organizational message from the server
   useEffect(() => {
     // Load org message from the server
     const fetchOrgMessage = async () => {

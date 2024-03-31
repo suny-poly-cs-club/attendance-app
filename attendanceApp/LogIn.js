@@ -60,13 +60,28 @@ const LogIn = ({ navigation, route }) => {
     Alert.alert('Error', 'An error occurred. Please try again later.');
   }
 };
-  
-  useEffect(() => {
-	//load org msg from the server here
-	//GET to /message
-	let orgMsg = "TMP MSG"
-	setOrgMsg(orgMsg);
-  },[]);
+
+//load org msg from the server here
+//GET to /message
+useEffect(() => {
+  // Load org msg from the server
+  const fetchOrgMessage = async () => {
+    try {
+      const response = await fetch('https://example.com/message');
+      if (response.ok) {
+        const data = await response.json();
+        setOrgMsg(data.message); // Assuming the message is provided in the 'message' field of the response JSON
+      } else {
+        // Handle error response
+        console.error('Error fetching org message:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching org message:', error);
+    }
+  };
+
+  fetchOrgMessage();
+}, []);
 
   return (
 	<ScrollView
