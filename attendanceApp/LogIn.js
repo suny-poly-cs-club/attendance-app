@@ -44,14 +44,14 @@ const LogIn = ({ navigation, route }) => {
     });
 
     if (response.ok) {
-      const data = await response.json(); // Parse response body as JSON
+      const data = await response.text(); // Parse response body as JSON
       const authToken = data.token; // Assuming the server returns the authentication token as 'token'
       
       // Set the context token
       context.setToken(authToken);
 
       // Navigate to the 'scan' screen
-      navigation.navigate('Scan');
+      context.goToPage("Scan",navigation);
     } else {
       Alert.alert('Error', 'Incorrect username or password. Please try again.');
     }
@@ -69,7 +69,7 @@ useEffect(() => {
     try {
       const response = await fetch('https://example.com/message');
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.text();
         setOrgMsg(data.message); // Assuming the message is provided in the 'message' field of the response JSON
       } else {
         // Handle error response

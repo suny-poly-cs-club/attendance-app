@@ -67,17 +67,17 @@ const SignUp = ({ navigation, route }) => {
   
       if (response.ok) {
         // Sign-up successful
-        const data = await response.json();
+        const data = await response.text();
         const authToken = data.token; // Assuming the server returns the authentication token as 'token'
   
         // Set the context token
         context.setToken(authToken);
   
         // Navigate to the 'Scan' screen
-        navigation.navigate('Scan');
+        context.goToPage("Scan",navigation);
       } else {
         // Sign-up failed, display error message
-        const errorData = await response.json();
+        const errorData = await response.text();
         Alert.alert('Sign Up Error', errorData.message);
       }
     } catch (error) {
@@ -96,7 +96,7 @@ const SignUp = ({ navigation, route }) => {
       try {
         const response = await fetch('https://example.com/message');
         if (response.ok) {
-          const data = await response.json();
+          const data = await response.text();
           setOrgMsg(data.message); // Assuming the message is provided in the 'message' field of the response JSON
         } else {
           // Handle error response
