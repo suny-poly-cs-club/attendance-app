@@ -34,6 +34,8 @@ const SignOrLogIn = ({navigation, route}) => {
 				setOrgMsg(msg);
 			});
 			
+		}).catch(err =>{
+			setOrgMsg("Communication Error");
 		});
 		
 		//check if the user has a currently valid token for this domain
@@ -52,6 +54,8 @@ const SignOrLogIn = ({navigation, route}) => {
 				//if status 401 then continue to this page
 				//do nothing
 				}
+			}).catch(err =>{
+				//do nothing
 			});
 		}
 	},[]);
