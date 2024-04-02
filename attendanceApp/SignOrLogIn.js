@@ -21,7 +21,7 @@ function goToLoginPage(navigation){
 let context = null;
 
 const SignOrLogIn = ({navigation, route}) => {
-	const [orgMsg, setOrgMsg] = useState("");
+	const [orgMsg, setOrgMsg] = useState("Loading ...");
 	
 	context = route.params.context
 	
@@ -69,8 +69,9 @@ const SignOrLogIn = ({navigation, route}) => {
 				<Button title="Log In" onPress = {()=>{goToLoginPage(navigation)}} />
 				<Text>{'\n'}</Text>
 				<Button title="Sign Up" onPress = {()=>{goToSignUpPage(navigation)}}/>
+				<Text>{'\n'}</Text>
+				<Button title="back" onPress = {()=>{context.goToPage("domainList",navigation);}}/>
 			</View>
-			{/*back button*/}
 		</ScrollView>
 	);
 };

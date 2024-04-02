@@ -74,6 +74,12 @@ const EnterDomain = ({navigation, route}) => {
 				});
 			});
 		}}/>
+		<Text>{'\n'}</Text>
+		{context.domainData.length > 0 && (
+			<Button title="Back" onPress={() => {
+				context.goToPage("domainList",navigation);
+			}} />
+		)}
       </View>
 	  {/*back button*/}
 		</View>
