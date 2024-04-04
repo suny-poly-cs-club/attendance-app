@@ -9,12 +9,12 @@ const SignUp = ({ navigation, route }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [orgMsg, setOrgMsg] = useState('');
+  const [orgMsg, setOrgMsg] = useState('Loading ...');
   
   context = route.params.context
 
   const handleGoBack = () => {
-    navigation.goBack();
+    context.goToPage("signOrLogin",navigation);
   };
 
   //ask the back end to create the user
@@ -67,7 +67,7 @@ const SignUp = ({ navigation, route }) => {
   
       if (response.ok) {
         // Sign-up successful
-        const data = await response.text();
+        const data = await response.json();
         const authToken = data.token; // Assuming the server returns the authentication token as 'token'
   
         // Set the context token
@@ -77,7 +77,7 @@ const SignUp = ({ navigation, route }) => {
         context.goToPage("scan",navigation);
       } else {
         // Sign-up failed, display error message
-        const errorData = await response.text();
+        const errorData = await response.json();
         Alert.alert('Sign Up Error', errorData.message);
       }
     } catch (error) {
@@ -86,7 +86,7 @@ const SignUp = ({ navigation, route }) => {
     }
     // This would be how to create an alert to let the user know sign up fails or is successful
     // or notify of other things depending on your needs
-    Alert.alert('Sign Up', `Email: ${email}\nPassword: ${password}\nFirst Name: ${firstName}\nLast Name: ${lastName}`);
+    //Alert.alert('Sign Up', `Email: ${email}\nPassword: ${password}\nFirst Name: ${firstName}\nLast Name: ${lastName}`);
 };
   
 //Below is the logic to load an organizational message from the server

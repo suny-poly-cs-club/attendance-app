@@ -7,7 +7,7 @@ const LogIn = ({ navigation, route }) => {
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [orgMsg, setOrgMsg] = useState('');
+  const [orgMsg, setOrgMsg] = useState('Loading ...');
   
   context = route.params.context
 
@@ -44,7 +44,7 @@ const LogIn = ({ navigation, route }) => {
     });
 
     if (response.ok) {
-      const data = await response.text(); // Parse response body as JSON
+      const data = await response.json(); // Parse response body as JSON
       const authToken = data.token; // Assuming the server returns the authentication token as 'token'
       
       // Set the context token
