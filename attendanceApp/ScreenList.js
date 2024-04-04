@@ -13,6 +13,7 @@ const ScreenList = ({navigation}) => {
 	
 	useEffect(() => {
 		navigation.addListener('focus', () => {
+			console.log(context);
 			//code here runs every time this screen is made the active screen
 			//check context Domain
 			//navigte to the requested page

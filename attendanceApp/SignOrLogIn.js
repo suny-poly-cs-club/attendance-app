@@ -10,30 +10,55 @@ import React, { useState, useEffect  } from 'react';
 
 function goToSignUpPage(navigation){
 	console.log("GO TO SIGN UP");
+	context.goToPage("signUp",navigation);
 }
 
 function goToLoginPage(navigation){
 	console.log("GO TO LOG IN");
+	context.goToPage("login",navigation);
 }
 
 let context = null;
 
 const SignOrLogIn = ({navigation, route}) => {
-	const [orgMsg, setOrgMsg] = useState("");
+	const [orgMsg, setOrgMsg] = useState("Loading ...");
 	
 	context = route.params.context
 	
 	useEffect(() => {
 		//load org message from the server here
 		//GET to /message
-		let orgmsg = "TMP MESSAGE";
-		setOrgMsg(orgmsg);
+		let orgmsg = "loading ...";
+		fetch(context.getURL()+"/message").then(responce =>{
+			responce.text().then(msg => {
+				setOrgMsg(msg);
+			});
+			
+		}).catch(err =>{
+			setOrgMsg("Communication Error");
+		});
+		
 		//check if the user has a currently valid token for this domain
-		//GET to /user
-		//if status 401 then continue to this page
-		//if status 200
-		//got to scan
-		},[]);
+		if(context.getToken() != ""){
+			//GET to /user
+			fetch(context.getURL()+"/user", {
+				headers: {
+					'Authorization': context.getToken()
+				}
+			}).then(usrResponce =>{
+				if(usrResponce.status <290){
+				//if status 200
+				//got to scan
+				context.goToPage("scan",navigation);
+				}else{
+				//if status 401 then continue to this page
+				//do nothing
+				}
+			}).catch(err =>{
+				//do nothing
+			});
+		}
+	},[]);
 	
 	return (
 		<ScrollView
@@ -48,8 +73,9 @@ const SignOrLogIn = ({navigation, route}) => {
 				<Button title="Log In" onPress = {()=>{goToLoginPage(navigation)}} />
 				<Text>{'\n'}</Text>
 				<Button title="Sign Up" onPress = {()=>{goToSignUpPage(navigation)}}/>
+				<Text>{'\n'}</Text>
+				<Button title="back" onPress = {()=>{context.goToPage("domainList",navigation);}}/>
 			</View>
-			{/*back button*/}
 		</ScrollView>
 	);
 };
