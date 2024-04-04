@@ -115,7 +115,7 @@ const SignUp = ({ navigation, route }) => {
         contentInsetAdjustmentBehavior="automatic">
 	 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 20, marginBottom: 10 }}>SIGN UP</Text>
-      <Text style={{ marginBottom: 20 }}>Use a unique password</Text>
+      <Text style={{ marginBottom: 10 }}>Use a unique password</Text>
       <Text style={{ marginBottom: 20 }}>{orgMsg}</Text>
       <TextInput
         style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}

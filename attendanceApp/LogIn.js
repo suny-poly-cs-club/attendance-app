@@ -88,7 +88,7 @@ useEffect(() => {
         contentInsetAdjustmentBehavior="automatic">
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text style={{ fontSize: 20, marginBottom: 10 }}>LOG IN</Text>
-        <Text style={{ marginBottom: 0 }}>Please log in below</Text>
+        <Text style={{ marginBottom: 10 }}>Please log in below</Text>
 	    <Text style={{ marginBottom: 20 }}>{orgMsg}</Text>
         <TextInput
           style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
