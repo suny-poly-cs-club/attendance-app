@@ -4,10 +4,10 @@ import { Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'reac
 let context = null;
 
 const LogIn = ({ navigation, route }) => {
-  const [username, setUsername] = useState('');
+  const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [orgMsg, setOrgMsg] = useState('');
+  const [orgMsg, setOrgMsg] = useState('Loading ...');
   
   context = route.params.context
 
@@ -16,9 +16,9 @@ const LogIn = ({ navigation, route }) => {
   };
 
   const handleLogIn = async () => {
-    // Validate if username or password is blank
-    if (!username || !password) {
-      setErrorMessage('Username and password are required');
+    // Validate if email or password is blank
+    if (!email || !password) {
+      setErrorMessage('email and password are required');
       // Clear error message after 5 seconds
       setTimeout(() => {
         setErrorMessage('');
@@ -38,13 +38,13 @@ const LogIn = ({ navigation, route }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username, // Assuming email is the user's email address
+        email, // Assuming email is the user's email address
         password
       })
     });
 
     if (response.ok) {
-      const data = await response.text(); // Parse response body as JSON
+      const data = await response.json(); // Parse response body as JSON
       const authToken = data.token; // Assuming the server returns the authentication token as 'token'
       
       // Set the context token
@@ -53,7 +53,7 @@ const LogIn = ({ navigation, route }) => {
       // Navigate to the 'scan' screen
       context.goToPage("scan",navigation);
     } else {
-      Alert.alert('Error', 'Incorrect username or password. Please try again.');
+      Alert.alert('Error', 'Incorrect email or password. Please try again.');
     }
   } catch (error) {
     console.error('Error:', error);
@@ -67,10 +67,10 @@ useEffect(() => {
   // Load org msg from the server
   const fetchOrgMessage = async () => {
     try {
-      const response = await fetch(context.getURL()+'message');
+      const response = await fetch(context.getURL()+'/message');
       if (response.ok) {
         const data = await response.text();
-        setOrgMsg(data.message); // Assuming the message is provided in the 'message' field of the response JSON
+        setOrgMsg(data); // Assuming the message is provided in the 'message' field of the response JSON
       } else {
         // Handle error response
         console.error('Error fetching org message:', response.status);
@@ -93,8 +93,8 @@ useEffect(() => {
         <TextInput
           style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
           placeholder="Email"
-          value={username}
-          onChangeText={setUsername}
+          value={email}
+          onChangeText={setemail}
         />
         <TextInput
           style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
