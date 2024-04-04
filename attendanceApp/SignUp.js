@@ -94,10 +94,10 @@ const SignUp = ({ navigation, route }) => {
     // Load org message from the server
     const fetchOrgMessage = async () => {
       try {
-        const response = await fetch(context.getURL()+'message');
+        const response = await fetch(context.getURL()+'/message');
         if (response.ok) {
           const data = await response.text();
-          setOrgMsg(data.message); // Assuming the message is provided in the 'message' field of the response JSON
+          setOrgMsg(data); // Assuming the message is provided in the 'message' field of the response JSON
         } else {
           // Handle error response
           console.error('Error fetching org message:', response.status);
