@@ -4,7 +4,7 @@ import { Text, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'reac
 let context = null;
 
 const LogIn = ({ navigation, route }) => {
-  const [username, setUsername] = useState('');
+  const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [orgMsg, setOrgMsg] = useState('');
@@ -16,9 +16,9 @@ const LogIn = ({ navigation, route }) => {
   };
 
   const handleLogIn = async () => {
-    // Validate if username or password is blank
-    if (!username || !password) {
-      setErrorMessage('Username and password are required');
+    // Validate if email or password is blank
+    if (!email || !password) {
+      setErrorMessage('email and password are required');
       // Clear error message after 5 seconds
       setTimeout(() => {
         setErrorMessage('');
@@ -38,7 +38,7 @@ const LogIn = ({ navigation, route }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username, // Assuming email is the user's email address
+        email, // Assuming email is the user's email address
         password
       })
     });
@@ -53,8 +53,7 @@ const LogIn = ({ navigation, route }) => {
       // Navigate to the 'scan' screen
       context.goToPage("scan",navigation);
     } else {
-		console.log(await response.json());
-      Alert.alert('Error', 'Incorrect username or password. Please try again.');
+      Alert.alert('Error', 'Incorrect email or password. Please try again.');
     }
   } catch (error) {
     console.error('Error:', error);
@@ -94,8 +93,8 @@ useEffect(() => {
         <TextInput
           style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
           placeholder="Email"
-          value={username}
-          onChangeText={setUsername}
+          value={email}
+          onChangeText={setemail}
         />
         <TextInput
           style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
