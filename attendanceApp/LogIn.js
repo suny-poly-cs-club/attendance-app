@@ -32,7 +32,7 @@ const LogIn = ({ navigation, route }) => {
 	
 //Below is to handle back end 
   try {
-    const response = await fetch('https://example.com/login', {
+    const response = await fetch(context.getURL()+'/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ const LogIn = ({ navigation, route }) => {
       context.setToken(authToken);
 
       // Navigate to the 'scan' screen
-      context.goToPage("Scan",navigation);
+      context.goToPage("scan",navigation);
     } else {
       Alert.alert('Error', 'Incorrect username or password. Please try again.');
     }
@@ -67,7 +67,7 @@ useEffect(() => {
   // Load org msg from the server
   const fetchOrgMessage = async () => {
     try {
-      const response = await fetch('https://example.com/message');
+      const response = await fetch(context.getURL()+'message');
       if (response.ok) {
         const data = await response.text();
         setOrgMsg(data.message); // Assuming the message is provided in the 'message' field of the response JSON

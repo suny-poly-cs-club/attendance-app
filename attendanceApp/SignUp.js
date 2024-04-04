@@ -52,7 +52,7 @@ const SignUp = ({ navigation, route }) => {
         return;
       }
   
-      const response = await fetch('https://example.com/sign-up', {
+      const response = await fetch(context.getURL()+'/sign-up', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ const SignUp = ({ navigation, route }) => {
         context.setToken(authToken);
   
         // Navigate to the 'Scan' screen
-        context.goToPage("Scan",navigation);
+        context.goToPage("scan",navigation);
       } else {
         // Sign-up failed, display error message
         const errorData = await response.text();
@@ -94,7 +94,7 @@ const SignUp = ({ navigation, route }) => {
     // Load org message from the server
     const fetchOrgMessage = async () => {
       try {
-        const response = await fetch('https://example.com/message');
+        const response = await fetch(context.getURL()+'message');
         if (response.ok) {
           const data = await response.text();
           setOrgMsg(data.message); // Assuming the message is provided in the 'message' field of the response JSON
