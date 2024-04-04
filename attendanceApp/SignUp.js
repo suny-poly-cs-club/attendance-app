@@ -9,65 +9,113 @@ const SignUp = ({ navigation, route }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [orgMsg, setOrgMsg] = useState('');
+  const [orgMsg, setOrgMsg] = useState('Loading ...');
   
   context = route.params.context
 
-  const handleSignUp = () => {
-    // Enforce criteria
-    if (password.length < 5) {
-      Alert.alert('Password Error', 'Password must be at least 5 characters long');
-      return;
-    }
-	
-	if(password != confirmPassword){
-		Alert.alert('Password Error', "Passwords do not match!");
-		return;
-	}
+  const handleGoBack = () => {
+    context.goToPage("signOrLogin",navigation);
+  };
 
-    if (email.length > 255) {
-      Alert.alert('Email Error', 'Email must be at most 255 characters long');
-      return;
-    }
-
-    if (firstName.length > 80) {
-      Alert.alert('First Name Error', 'First Name must be at most 80 characters long');
-      return;
-    }
-
-    if (lastName.length > 80) {
-      Alert.alert('Last Name Error', 'Last Name must be at most 80 characters long');
-      return;
-    }
-
-	//ask the back end to create the user
+  //ask the back end to create the user
 	//POST to /sign-up {firstName, lastName, email, password}
 	//if not success try to read and display the error message
 	//if success
 	//set context token
 	//go to scan
 	
-	
+  const handleSignUp = async () => {
+    try {
+      // Enforce criteria
+      if (password.length < 5) {
+        Alert.alert('Password Error', 'Password must be at least 5 characters long');
+        return;
+      }
+  
+      if (password !== confirmPassword) {
+        Alert.alert('Password Error', 'Passwords do not match!');
+        return;
+      }
+  
+      if (email.length > 255) {
+        Alert.alert('Email Error', 'Email must be at most 255 characters long');
+        return;
+      }
+  
+      if (firstName.length > 80) {
+        Alert.alert('First Name Error', 'First Name must be at most 80 characters long');
+        return;
+      }
+  
+      if (lastName.length > 80) {
+        Alert.alert('Last Name Error', 'Last Name must be at most 80 characters long');
+        return;
+      }
+  
+      const response = await fetch(context.getURL()+'/sign-up', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password
+        })
+      });
+  
+      if (response.ok) {
+        // Sign-up successful
+        const data = await response.json();
+        const authToken = data.token; // Assuming the server returns the authentication token as 'token'
+  
+        // Set the context token
+        context.setToken(authToken);
+  
+        // Navigate to the 'Scan' screen
+        context.goToPage("scan",navigation);
+      } else {
+        // Sign-up failed, display error message
+        const errorData = await response.json();
+        Alert.alert('Sign Up Error', errorData.message);
+      }
+    } catch (error) {
+      console.error('Error signing up:', error);
+      Alert.alert('Sign Up Error', 'An error occurred while signing up. Please try again later.');
+    }
     // This would be how to create an alert to let the user know sign up fails or is successful
     // or notify of other things depending on your needs
-    Alert.alert('Sign Up', `Email: ${email}\nPassword: ${password}\nFirst Name: ${firstName}\nLast Name: ${lastName}`);
-  };
+    //Alert.alert('Sign Up', `Email: ${email}\nPassword: ${password}\nFirst Name: ${firstName}\nLast Name: ${lastName}`);
+};
   
+//Below is the logic to load an organizational message from the server
   useEffect(() => {
-		//load org msg from the server here
-		let orgMsg = "TMP MSG"
-		//GET to /message
-		setOrgMsg(orgMsg);
-		
-	},[]);
+    // Load org message from the server
+    const fetchOrgMessage = async () => {
+      try {
+        const response = await fetch(context.getURL()+'/message');
+        if (response.ok) {
+          const data = await response.text();
+          setOrgMsg(data); // Assuming the message is provided in the 'message' field of the response JSON
+        } else {
+          // Handle error response
+          console.error('Error fetching org message:', response.status);
+        }
+      } catch (error) {
+        console.error('Error fetching org message:', error);
+      }
+    };
+
+    fetchOrgMessage();
+  }, []);
 
   return (
     <ScrollView
         contentInsetAdjustmentBehavior="automatic">
 	 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 20, marginBottom: 10 }}>SIGN UP</Text>
-      <Text style={{ marginBottom: 20 }}>Use a unique password</Text>
-      {/*The line below can be commented back in to connect this message to the backend*/}
+      <Text style={{ marginBottom: 10 }}>Use a unique password</Text>
       <Text style={{ marginBottom: 20 }}>{orgMsg}</Text>
       <TextInput
         style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
@@ -83,7 +131,7 @@ const SignUp = ({ navigation, route }) => {
         onChangeText={setPassword}
         secureTextEntry={true}
       />
-	  <TextInput
+	    <TextInput
         style={{ borderWidth: 1, padding: 10, marginBottom: 15, width: 250 }}
         placeholder="Confirm Password"
         value={confirmPassword}
@@ -103,13 +151,18 @@ const SignUp = ({ navigation, route }) => {
         onChangeText={setLastName}
       />
       <TouchableOpacity
-        style={{ backgroundColor: 'blue', padding: 10 }}
-        onPress={handleSignUp} // Call the handleSignUp function on button press
+        style={{ backgroundColor: 'blue', padding: 10, marginBottom: 15 }}
+        onPress={handleSignUp}
       >
         <Text style={{ color: 'white' }}>Sign Up</Text>
       </TouchableOpacity>
-	 </View>
-	 {/*back button*/}
+      <TouchableOpacity
+        style={{ backgroundColor: 'gray', padding: 10 }}
+        onPress={handleGoBack}
+      >
+        <Text style={{ color: 'white' }}>Back</Text>
+      </TouchableOpacity>
+	   </View>
     </ScrollView>
   );
 };
