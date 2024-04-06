@@ -16,6 +16,7 @@ const windowHeight = Dimensions.get('window').height;
 const viewBorderAmmount =1.5;
 
 let context = null;
+let processingQR = false;
 
 const Scan = ({navigation, route}) => {
 	context = route.params.context
@@ -50,31 +51,40 @@ const Scan = ({navigation, route}) => {
 };
 
 function scanResult(input){
-	fetch(context.getURL()+'/check-in',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-		'Authorization': context.getToken()
-      },
-      body: JSON.stringify({
-		 code: input.data
-	  })
-    }).then(responce =>{
-		if(responce.ok){
-			Alert.alert("Success!");
-		}else{
-			responce.text().then(msg =>{
-				Alert.alert("Something Went Wrong! "+responce.status+" message: "+msg);
-			}).catch(err =>{
-				Alert.alert("Oh Come on!");
-			});
-			
-		}
-	}).catch(err => {
-		Alert.alert("Error: "+err);
-	});
-	console.log(input);
-	Alert.alert("SCANNED!\n"+input.data);
+	//dont send another request before the current promt have been dimissed
+	if(!processingQR){
+		processingQR=true;
+		fetch(context.getURL()+'/check-in',{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': context.getToken()
+		},
+		body: JSON.stringify({
+			code: input.data
+		})
+		}).then(responce =>{
+			if(responce.ok){
+				Alert.alert("Success!");
+			}else{
+				console.log(responce);
+				responce.json().then(msg =>{
+					Alert.alert("Something Went Wrong!",msg.message,[{text: 'OK', onPress: () => processingQR=false}]);
+					
+				}).catch(err =>{
+					Alert.alert("Responce Error","",[{text: 'OK', onPress: () => processingQR=false}]);
+					console.log(err);
+					processingQR=false;
+				});
+				
+			}
+		}).catch(err => {
+			Alert.alert("Error: ",err,[{text: 'OK', onPress: () => processingQR=false}]);
+			processingQR=false;
+		});
+		//console.log(input);
+		Alert.alert("Loading ...");
+	}
 }
 
 
