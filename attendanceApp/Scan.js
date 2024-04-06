@@ -40,11 +40,11 @@ const Scan = ({navigation, route}) => {
 			<View>
 				<Text>{"\n"}</Text>
 				
-				<Button title="Log Out" onPress={() => { console.log("pressed");}} />
+				<Button title="Log Out" onPress={() => { context.setToken(""); context.goToPage("signOrLogin",navigation); }} />
 				
 				<Text>{"\n"}</Text>
 				
-				<Button title="Change Domain" onPress={() => { console.log("pressed"); }} />
+				<Button title="Change Domain" onPress={() => { context.goToPage("domainlist",navigation) }} />
 			</View>
 		</View>
 	);
@@ -65,9 +65,9 @@ function scanResult(input){
 		})
 		}).then(responce =>{
 			if(responce.ok){
-				Alert.alert("Success!");
+				Alert.alert("Success!","You have been marked as Here",[{text: 'OK', onPress: () => processingQR=false}]);
 			}else{
-				console.log(responce);
+				//console.log(responce);
 				responce.json().then(msg =>{
 					Alert.alert("Something Went Wrong!",msg.message,[{text: 'OK', onPress: () => processingQR=false}]);
 					
