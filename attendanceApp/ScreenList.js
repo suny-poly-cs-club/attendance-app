@@ -48,6 +48,7 @@ const ScreenList = ({navigation}) => {
 	},[navigation,context]);
 	return (
 		<View>
+		{/*
 			<Text>
 				Go to Screen:
 			</Text>
@@ -73,7 +74,10 @@ const ScreenList = ({navigation}) => {
 			<Text />
 			<Button title="Scan" onPress={()=>{
 				navigation.navigate('Scan',{"context": context})
-				}}/>
+		}}/>*/}
+		<Text>
+		Loading ...
+		</Text>
 		</View>
 	);
 };
