@@ -2,12 +2,13 @@ import Storage from 'react-native-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Context{
-	constructor(){
+	constructor(nav){
 		this.currentPage = "";
 		this.domain = "";
 		this.token = "";
-		this.loadDomainData();
+		this.loadDomainData(nav);
 		this.protocal = "";
+		this.dataReady=false;
 	}
 	
 	/**preferd method for switching between pages
@@ -100,19 +101,26 @@ class Context{
 		});
 	}
 	
-	loadDomainData(){
+	loadDomainData(navigation){
 		storage.load({
 			key: 'domains'
 		}).then(ret => {
 			// found data go to then()
 			
 			this.domainData= JSON.parse(ret);
-			//console.log(this.domainData);
+			if(!this.dataReady){
+				this.dataReady=true;
+				navigation.navigate('Domain_list',{"context": this});
+			}
 		}).catch(err => {
 			// any exception including data not found
 			// goes to catch()
 			//console.warn(err.message);
 			this.saveDomainData();
+			if(!this.dataReady){
+				this.dataReady=true;
+				navigation.navigate('Domain_list',{"context": this});
+			}
 		})
 	}		
 }
