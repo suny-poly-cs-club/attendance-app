@@ -47,5 +47,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<!-- Required with iOS 10 and higher -->
+	<key>NSCameraUsageDescription</key>
+	<string>Allow Camera Access for QR Scanner</string>
+
+
 </dict>
 </plist>
