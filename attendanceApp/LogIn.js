@@ -12,7 +12,7 @@ const LogIn = ({ navigation, route }) => {
   context = route.params.context
 
   const handleGoBack = () => {
-    navigation.goBack();
+    context.goToPage("signOrLogin",navigation);
   };
 
   const handleLogIn = async () => {
