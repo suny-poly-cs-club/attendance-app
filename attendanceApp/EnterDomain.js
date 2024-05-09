@@ -41,7 +41,7 @@ const EnterDomain = ({navigation, route}) => {
 			fetch('https://'+enteredDomain+"/ver").then( (res) =>{
 				//getting the raw content is very anoying
 				res.text().then(text =>{
-					if(text == "text attendance app cs"){
+					if(text == "attendance app cs"){
 						//save the new domain to the stored list
 						//set the context domain(same as prevous step)
 						context.addNewDomain(enteredDomain,"https://");
